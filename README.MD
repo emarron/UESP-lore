@@ -6,8 +6,10 @@
 
   
 
-This project utilizes `llamaindex` on top of `ChatGPT-3.5` to enable users to ask questions about Elder Scrolls lore. It references a list of 7,000 topics from the UESP wiki. Specifically that which were under the designation "Lore".
+This project utilizes `llamaindex` on top of `ChatGPT-3.5` or a local `ollama` install to enable users to ask questions about Elder Scrolls lore. It references a list of 7,000 topics from the UESP wiki. Specifically that which were under the designation "Lore".
 
+If you hate installing stuff you can try this when it actually starts working:
+https://huggingface.co/spaces/emarron/elderscrolls_lore_bot
   
 
 ### Example
@@ -28,8 +30,12 @@ This project utilizes `llamaindex` on top of `ChatGPT-3.5` to enable users to as
 
 -  **Response:** Zaraphus was a Demi-Lich who possessed a special diamond with magical properties, including the ability to show the owner the location of the Crystal Tower. He lost this gem when he was defeated in fair combat by the Mages Guild Loremaster Corim Ashlen.
 
+**llama_indexer_local.py:**
   
-  
+-  **Prompt:** Who is Zarphus?
+
+-  **Response:** Zaraphus was a Demi-Lich who possessed a special diamond that had several magical properties including the ability to show the owner the location of the Crystal Tower. It is unknown how Zaraphus obtained this gem but he was relieved of it when he was defeated in fair combat by the Mages Guild Loremaster Corim Ashlen.
+
 
 ## Getting Started
 
@@ -39,7 +45,7 @@ This project utilizes `llamaindex` on top of `ChatGPT-3.5` to enable users to as
 
   
 
-- A ChatGPT API key
+- A ChatGPT API key or Ollama installed
 
 - Python 3.8 or higher
 
@@ -48,7 +54,6 @@ This project utilizes `llamaindex` on top of `ChatGPT-3.5` to enable users to as
   
 
 ### Installation
-
   
 
 1.  **Clone the Repository**
@@ -68,8 +73,10 @@ cd elder-scrolls-lore-chatbot
 2.  **Download Storage Folder**
 
   
-
+CHATGPT:
 Download the storage folder from [\[Here\]](https://www.mediafire.com/file/amooo5lm6jxwm2m/storage.7z/file) and place it in the project root directory.
+OLLAMA:
+Download the storage folder from [\[Here\]](https://www.mediafire.com/file/96xk9ulhjdeqlc4/storage_bge.7z/file) and place it in the project root directory.
 
   
 
@@ -83,9 +90,12 @@ pip install -r requirements.txt
 
 ```
 
+4. **Donwload Ollama (LOCAL ONLY)**
+
+If using the local version you need Ollama: [\[Here\]](https://ollama.com/download)
   
 
-4.  **Set Up Environment Variables**
+4.  **Set Up Environment Variables (CHATGPT ONLY)**
 
   
 
@@ -99,14 +109,13 @@ CHATGPT_API_KEY=your_api_key_here
 
 ```
 
+
   
 
 ### Project Structure
 
-  
-
--  `llama_indexer.py`: If data is present in the storage folder, it starts a chatbot that you can use to ask about Elder Scrolls lore. Otherwise it serves as a trainer if no data is in the storage folder but THERE IS data in the articles folder.
-
+-  `llama_indexer_local.py`: This is the local version, and it is slow but free.
+-  `llama_indexer.py`: This is the chatgpt version which is also more or less free unless you make a lot of requests to chatgpt.
 -  `cleaning_HTML directory`: Cleans HTML data, requires `beautifulsoup4`.
 
 -  `cleaning_ARTICLES directory`: Further processing and cleaning of articles.
@@ -146,7 +155,12 @@ If there is no data in the storage folder but there is data in the articles fold
 python llama_indexer.py
 
 ```
+ or 
+```bash
 
+python llama_indexer_local.py
+
+```
   
 
 2.  **Ask Questions**

@@ -1,18 +1,22 @@
 import os.path
 from pathlib import Path
 from dotenv import load_dotenv
+from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.core import (
     VectorStoreIndex,
     SimpleDirectoryReader,
     StorageContext,
-    load_index_from_storage,
+    load_index_from_storage, Settings,
 )
-from llama_index.legacy.llms import Ollama
+from llama_index.llms.ollama import Ollama
 
 # Path to your local corpus directory
 PERSIST_DIR = 'storage2'
 corpus_directory = 'articles'
 
+Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-base-en-v1.5")
+
+Settings.llm = Ollama(model="llama3", request_timeout=360.0)
 
 load_dotenv()
 if not os.path.exists(PERSIST_DIR):
