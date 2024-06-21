@@ -1,5 +1,4 @@
 import os.path
-from pathlib import Path
 from dotenv import load_dotenv
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.core import (
@@ -11,7 +10,7 @@ from llama_index.core import (
 from llama_index.llms.ollama import Ollama
 
 # Path to your local corpus directory
-PERSIST_DIR = 'storage2'
+PERSIST_DIR = 'storage'
 corpus_directory = 'articles'
 
 Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-base-en-v1.5")
