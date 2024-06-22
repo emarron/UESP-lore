@@ -13,8 +13,7 @@ This project utilizes `llamaindex` on top of `ChatGPT-3.5` or a local `ollama` i
 
  There **IS** a hugging faces demo of the **worst model working at the slowest speed**, I wouldn't recommend using it unless you have a potato PC and can't get ChatGPT API key:
  
-[HuggingFaces Demo](https://huggingface.co/spaces/emarron/elderscrolls_lore_bot
-)
+
 Read below for more information about the models in general. Or just skip to TIER LIST for the list of models and their stats.
 
 # General info:
@@ -99,7 +98,8 @@ With newfound clarity and purpose, Tilse Sendas embraced the divine spark within
 -  **Prompt:** Who is Zarphus?
 - **Response:** Zarphus (fl. before 3E 389) was a Demi-Lich who possessed a special diamond that had several magical properties including the ability to show the owner the location of the Crystal Tower . It is unknown how Zarphus obtained this gem but he was relieved of it when he was defeated in fair combat by the Mages Guild Loremaster Corim Ashlen . [1] Mane Zebiden-jo (fl. ~ 2E 182 ) [ edit ] Zebiden-jo (or Zibbiden-jo ) was the Mane of the Khajiiti people during the early Second Era , before the unification of the Sixteen Kingdoms. Little is known about Zebiden-jo's life. It is known, however, that he faced one of his parent's spirit and Argonian soul reavers during his trials to become the Mane circa 2E 182 . The trials reflected the challenges faced before their ascension. He died at some point before the unification of Elsweyr and formation of the Elsweyr Confederacy in 2E 309 . His remains
 
-**Hugging Faces which uses llama_indexer_local_tinyllama.py** (Since tinyllama is tiny it doesn't require much RAM to load it. Ollama uses black magic to give you good results without using 32gb of ram like LLama3 usually does. Anyway this is why its used in the Hugging Faces Demo)
+**[HuggingFaces Demo](https://huggingface.co/spaces/emarron/elderscrolls_lore_bot
+) which uses llama_indexer_local_tinyllama.py** (Since tinyllama is tiny it doesn't require much RAM to load it. This is also why it sucks.)
 
 - **Time:** 170s
 
