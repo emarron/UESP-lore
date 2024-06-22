@@ -1,4 +1,7 @@
 import os.path
+
+import gr as gr
+import gradio as gr
 from pathlib import Path
 from dotenv import load_dotenv
 from llama_index.core import (
@@ -10,7 +13,7 @@ from llama_index.core import (
 from llama_index.legacy.llms import Ollama
 
 # Path to your local corpus directory
-PERSIST_DIR = 'storage2'
+PERSIST_DIR = 'storage_chatgpt'
 corpus_directory = 'articles'
 
 
@@ -29,16 +32,20 @@ else:
 query_engine = index.as_query_engine()
 
 
-def chat():
-    print("Chatbot is ready. Type 'exit' to end the conversation.")
-    while True:
-        user_input = input("You: ")
-        if user_input.lower() == 'exit':
-            print("Ending the chat. Goodbye!")
-            break
-        response = query_engine.query(user_input)
-        print(f"Chatbot: {response}")
+def chatbot_response(message, history):
+    response = query_engine.query(message)
+    return str(response)
 
 
-# Start the chat
-chat()
+iface = gr.ChatInterface(
+    fn=chatbot_response,
+    title="UESP Lore Chatbot",
+    description="Ask questions about The Elder Scrolls lore!",
+    # examples=["Who is Vivec?", "Tell me about the Oblivion Crisis", "Who is King Edward?"],
+    # cache_examples=False,
+)
+
+# Launch the interface
+if __name__ == "__main__":
+    # chat()
+    iface.launch()

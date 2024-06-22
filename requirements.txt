@@ -3,4 +3,7 @@ llama_index
 beautifulsoup4
 llama-index-llms-ollama
 llama-index-embeddings-huggingface
+llama_index-llms-huggingface
 openai
+gradio
+bitsandbytes
