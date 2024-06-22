@@ -10,7 +10,7 @@
 
 This project utilizes `llamaindex` on top of `ChatGPT-3.5` or a local `ollama` install to enable users to ask questions about Elder Scrolls lore. It references a list of 7,000 topics from the UESP wiki. Specifically that which were under the designation "Lore".
 
-If you hate installing stuff you can try this when it actually starts working:
+If you hate installing stuff you can try this when it actually starts working (Its very slow):
   
 [HuggingFaces Demo](https://huggingface.co/spaces/emarron/elderscrolls_lore_bot
 )
