@@ -3,3 +3,4 @@ llama_index
 beautifulsoup4
 llama-index-llms-ollama
 llama-index-embeddings-huggingface
+openai

@@ -1,6 +1,5 @@
 import os
 import gradio as gr
-import torch
 from dotenv import load_dotenv
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.core import (
@@ -9,7 +8,8 @@ from llama_index.core import (
     StorageContext,
     load_index_from_storage, Settings,
 )
-from transformers import pipeline, AutoTokenizer, AutoModelForCausalLM
+from llama_index.llms.huggingface import HuggingFaceLLM
+from transformers import BitsAndBytesConfig
 
 load_dotenv()
 
@@ -17,21 +17,24 @@ load_dotenv()
 PERSIST_DIR = './storage'
 corpus_directory = 'articles'
 
+quantization_config = BitsAndBytesConfig(
+    load_in_4bit=True,
+    # bnb_4bit_compute_dtype=torch.float16,
+    # bnb_4bit_quant_type="nf4",
+    # bnb_4bit_use_double_quant=True,
+)
+
 # Configure the settings
 Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-base-en-v1.5")
 
-# Load the Llama 3 model and tokenizer
-model_id = "meta-llama/Meta-Llama-3-8B-Instruct"
-tokenizer = AutoTokenizer.from_pretrained(model_id, use_auth_token=True)
-model = AutoModelForCausalLM.from_pretrained(model_id, use_auth_token=True, torch_dtype=torch.float16)
-
-
-# Initialize the Llama 3 pipeline
-llama3_pipeline = pipeline(
-    "text-generation",
-    model=model,
-    tokenizer=tokenizer,
-    device=0 if torch.cuda.is_available() else -1,
+Settings.llm = HuggingFaceLLM(
+    model_name="TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+    tokenizer_name="TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+    context_window=2048,
+    max_new_tokens=256,
+    model_kwargs={"quantization_config": quantization_config},
+    generate_kwargs={"temperature": 0.7, "top_k": 50, "top_p": 0.95},
+    device_map="auto",
 )
 
 if not os.path.exists(PERSIST_DIR):
@@ -48,29 +51,30 @@ else:
 query_engine = index.as_query_engine()
 
 
-def chatbot_response(user_input):
-    # Retrieve context from the vector store
-    context = query_engine.query(user_input)
-    context_str = str(context)
+# def chat():
+#     print("Chatbot is ready. Type 'exit' to end the conversation.")
+#     while True:
+#         user_input = input("You: ")
+#         if user_input.lower() == 'exit':
+#             print("Ending the chat. Goodbye!")
+#             break
+#         response = query_engine.query(user_input)
+#         print(f"Chatbot: {response}")
 
-    # Combine user input with retrieved context
-    combined_input = f"{context_str}\n\nUser: {user_input}\nAssistant:"
+def chatbot_response(message, history):
+    response = query_engine.query(message)
+    return str(response)
 
-    # Generate a response using the Llama 3 pipeline
-    outputs = llama3_pipeline(
-        combined_input,
-        max_new_tokens=256,
-        eos_token_id=tokenizer.eos_token_id,
-        do_sample=True,
-        temperature=0.6,
-        top_p=0.9,
-    )
-    assistant_response = outputs[0]["generated_text"].split("Assistant:")[1].strip()
-    return assistant_response
 
-interface = gr.Interface(fn=chatbot_response, inputs="text", outputs="text", title="Testing HF deployment")
-
+iface = gr.ChatInterface(
+    fn=chatbot_response,
+    title="UESP Lore Chatbot",
+    description="Ask questions about The Elder Scrolls lore!",
+    examples=["Who is Vivec?", "Tell me about the Oblivion Crisis", "Who is King Edward?"],
+    cache_examples=True,
+)
 
 # Launch the interface
 if __name__ == "__main__":
-    interface.launch()
+    # chat()
+    iface.launch()

@@ -1,0 +1,17 @@
+
+
+
+python-dotenv~=1.0.1
+llama_index
+beautifulsoup4~=4.12.3
+llama-index-llms-ollama
+llama-index-embeddings-huggingface
+llama_index-llms-huggingface
+torch~=2.3.1
+transformers~=4.41.2
+numpy~=1.23.2
+openai~=1.35.3
+scikit-learn~=1.5.0
+requests~=2.32.3
+protobuf==3.20.1
+bitsandbytes
