@@ -1,5 +1,6 @@
 
 
+
   
   
 
@@ -14,15 +15,52 @@ If you hate installing stuff you can try this when it actually starts working:
 [HuggingFaces Demo](https://huggingface.co/spaces/emarron/elderscrolls_lore_bot
 )
 
+This is not a chat system with a lot of memory so as soon as you move to a new question, it won't remember your previous query (usually).
+
+In general I am highly satisfied with the ChatGPT version, satisfied with the local Ollama, not happy with tinyllama, and very disappointed in the huggingfaces (tinyllama) version.
+
+These models are for answering questions about Elder Scrolls Lore not coming up with new stuff although they can occasionally do that if you poke it in the right way.
+
+ I would advise everything to be taken **with a grain of salt**, and these models should be used as a tool to more efficiently browse for elder scrolls lore. It's not really for generating new content but answering questions you may have.
+ 
+
+**e.g: Lore Question:**
+
+**prompt:** how does chim relate to dragonbreak
+
+**response:** CHIM is a state of enlightenment in the Elder Scrolls lore where one realizes the true nature of the universe and their place within it. It is achieved by understanding the illusory nature of reality and asserting one's individuality within that illusion. CHIM is said to grant individuals god-like powers, allowing them to manipulate reality. In the context of Dragon Breaks, CHIM is sometimes associated with the ability to maintain individuality and coherence during the chaotic and non-linear time of a Dragon Break. Some believe that those who have achieved CHIM may be able to navigate and even influence events during a Dragon Break due to their understanding of the true nature of existence.
+
+ **e.g asking for a story:**
+
+ **prompt:** "write me a story about a dunmer overcoming skooma"
+ 
+**response:** "A Dunmer named Tilse Sendas shared her personal journey of overcoming skooma addiction. She described the initial infatuation, the intense obsession, and the deep degradation caused by her addiction. Through her narrative, Tilse revealed that the key to breaking free from the shackles of skooma lay in understanding and accepting the allure of the drug, as well as letting go of the shame associated with it. She emphasized that there was no magical cure or potion, but rather a path of self-awareness and choice. Tilse's story challenged the common belief that once enslaved by skooma, one could never break free, proving that redemption was possible through self-empowerment and a shift in perspective."
+
+**human conclusion:** you might want to go check the wiki because that sure sounds like a book. Check the name Tilse Sendas.
+
+**wiki result:** https://en.uesp.net/wiki/Lore:Confessions_of_a_Skooma-Eater
+
+finally
+
+**e.g asking for a story based on the last two prompts:**
+
+**prompt:** "write me a story about Tilse Sendas while high on skooma achieving chim"
+
+**response:** "Tilse Sendas, under the influence of skooma, embarked on a journey of self-discovery that led her to the elusive state of CHIM. As the moon-sugar coursed through her veins, she found herself in a realm where reality and illusion intertwined seamlessly. In her heightened state of consciousness, she delved deep into the mysteries of the universe, unraveling the secrets of existence and the nature of the divine.
+
+Through the haze of skooma-induced euphoria, Tilse experienced profound insights and revelations that transcended mortal understanding. She danced on the edge of madness and enlightenment, teetering between oblivion and apotheosis. In a moment of clarity amidst the chaos, she grasped the essence of CHIM - the realization of the self within the dream of the Godhead.
+
+With newfound clarity and purpose, Tilse Sendas embraced the divine spark within her being, achieving CHIM in a blaze of transcendent glory. In that fleeting moment of enlightenment, she became one with the universe, a radiant beacon of divine wisdom and power. And as the echoes of her enlightenment reverberated through the fabric of reality, Tilse Sendas ascended to a higher plane of existence, forever transformed by the profound truth she had uncovered in her skooma-induced revelation."
+
+**human conclusion:** Yep that sure sounds like the elder scrolls.
+
 ### TIER LIST:
 
 1. ChatGPT version as it works the best and it is the fastest. I think you can have a chatGPT API key for free so why not.
 2. Local Ollama is not as good as chatgpt and can get slow if you don't have a GPU hooked up with torch (or a low power GPU).
 3. Local TinyLlama is here just because I have it, it's the local version of the Hugging Faces Demo.
-4. Hugging faces demo is to see if you like the general vibe. It's very limited. 
-### Example
-
-  
+4. Hugging faces demo is to see if you like the general vibe. It's very... not good.
+### Examples of Same Query
 
 **ChatGPT-3.5:**
 - **Time:** 1s
@@ -53,7 +91,7 @@ If you hate installing stuff you can try this when it actually starts working:
 -  **Prompt:** Who is Zarphus?
 - **Response:** Zarphus (fl. before 3E 389) was a Demi-Lich who possessed a special diamond that had several magical properties including the ability to show the owner the location of the Crystal Tower . It is unknown how Zarphus obtained this gem but he was relieved of it when he was defeated in fair combat by the Mages Guild Loremaster Corim Ashlen . [1] Mane Zebiden-jo (fl. ~ 2E 182 ) [ edit ] Zebiden-jo (or Zibbiden-jo ) was the Mane of the Khajiiti people during the early Second Era , before the unification of the Sixteen Kingdoms. Little is known about Zebiden-jo's life. It is known, however, that he faced one of his parent's spirit and Argonian soul reavers during his trials to become the Mane circa 2E 182 . The trials reflected the challenges faced before their ascension. He died at some point before the unification of Elsweyr and formation of the Elsweyr Confederacy in 2E 309 . His remains
 
-**Hugging Faces which uses llama_indexer_local_Meta-Llama-3-8B-Instruct.py: (this is basically local_ollama)**
+**Hugging Faces which uses llama_indexer_local_tinyllama.py**
 - **Time:** 170s
 
 -  **Prompt:** Who is Zarphus?
