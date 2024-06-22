@@ -1,4 +1,5 @@
 
+
   
   
 
@@ -13,11 +14,11 @@ If you hate installing stuff you can try this when it actually starts working:
 [HuggingFaces Demo](https://huggingface.co/spaces/emarron/elderscrolls_lore_bot
 )
 
-TIER LIST:
+### TIER LIST:
 
 1. ChatGPT version as it works the best and it is the fastest. I think you can have a chatGPT API key for free so why not.
 2. Local Ollama is not as good as chatgpt and can get slow if you don't have a GPU hooked up with torch (or a low power GPU).
-3. Local TinyLlama is here just for fun, it's the local version of the Hugging Faces Demo.
+3. Local TinyLlama is here just because I have it, it's the local version of the Hugging Faces Demo.
 4. Hugging faces demo is to see if you like the general vibe. It's very limited. 
 ### Example
 
@@ -52,7 +53,7 @@ TIER LIST:
 -  **Prompt:** Who is Zarphus?
 - **Response:** Zarphus (fl. before 3E 389) was a Demi-Lich who possessed a special diamond that had several magical properties including the ability to show the owner the location of the Crystal Tower . It is unknown how Zarphus obtained this gem but he was relieved of it when he was defeated in fair combat by the Mages Guild Loremaster Corim Ashlen . [1] Mane Zebiden-jo (fl. ~ 2E 182 ) [ edit ] Zebiden-jo (or Zibbiden-jo ) was the Mane of the Khajiiti people during the early Second Era , before the unification of the Sixteen Kingdoms. Little is known about Zebiden-jo's life. It is known, however, that he faced one of his parent's spirit and Argonian soul reavers during his trials to become the Mane circa 2E 182 . The trials reflected the challenges faced before their ascension. He died at some point before the unification of Elsweyr and formation of the Elsweyr Confederacy in 2E 309 . His remains
 
-**Hugging Faces which uses llama_indexer_local_tinyllama.py:**
+**Hugging Faces which uses llama_indexer_local_Meta-Llama-3-8B-Instruct.py: (this is basically local_ollama)**
 - **Time:** 170s
 
 -  **Prompt:** Who is Zarphus?
@@ -98,10 +99,13 @@ cd elder-scrolls-lore-chatbot
   
 CHATGPT:
 Download the storage folder from [\[Here\]](https://www.mediafire.com/file/0awjd9hcds0dg7e/storage_ada_gpt_3-5-turbo.7z/file) and place it in the project root directory.
+
 OLLAMA:
 Download the storage folder from [\[Here\]](https://www.mediafire.com/file/nc1wxmdwzje4j6t/storage_bge-base-en-v1-5_local_llama3.7z/file) and place it in the project root directory.
+
 TINYLLAMA:
 Download the storage folder from [\[Here\]](https://www.mediafire.com/file/5o5k3wmehvhacoc/storage_bge-base-en-v1-5_TinyLlama-1-1B-Chat-v1-0.7z/file) and place it in the project root directory.
+
 
   
 
@@ -134,7 +138,7 @@ CHATGPT_API_KEY=your_api_key_here
 HF_KEY=your_huggingfaces_api_key_here
 
 ```
-The Hugging Faces key **might** be required for the TinyLLama, but I don't know.
+The Hugging Faces key **might** be required for the TinyLlama version, but I don't know, you shouldn't use it anyway.
 
   
 
@@ -142,12 +146,12 @@ The Hugging Faces key **might** be required for the TinyLLama, but I don't know.
 
 -  `llama_indexer_local_ollama.py`: This is the local version, and it is slow but free.
 -  `llama_indexer_chatgpt.py`: This is the chatgpt version which is also more or less free unless you make a lot of requests to chatgpt.
--  `llama_indexer_local_tinyllama.py` This is the smallest version, which should be faster than ollama but suck more.
+-  `llama_indexer_local_tinyllama.py` This is the worst version, and is somehow slower than local_ollama (at least on my machine).
 -  `cleaning_HTML directory`: Cleans HTML data, requires `beautifulsoup4`.
 
 -  `cleaning_ARTICLES directory`: Further processing and cleaning of articles.
 
--  `cleaning_TESCONV_JSON directory`: Processes JSON dumps of game data from TESCONV. Note: This section is less polished. No I cannot provide game dumps.
+-  `cleaning_TESCONV_JSON directory`: Processes JSON dumps of game data from TES3CONV. Note: This section is less polished. No I cannot provide game dumps. You can get these easily with [TES3CONV](https://github.com/Greatness7/tes3conv)
 
 -  `failures`: Contains attempts to create an independent small LLM or LoRA that were unsuccessful due to being not good or taking forever.
 
@@ -189,7 +193,13 @@ python llama_indexer_chatgpt.py
  or 
 ```bash
 
-python llama_indexer_local_ollama_ollama.py
+python llama_indexer_local_ollama.py
+
+```
+ or if you hate yourself
+```bash
+
+python llama_indexer_local_tinyllama.py
 
 ```
 
