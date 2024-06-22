@@ -75,7 +75,7 @@ With newfound clarity and purpose, Tilse Sendas embraced the divine spark within
   
 
 **llama_indexer_chatgpt.py:**
-- **Boot time:** 2 minutes. CPU usage mild during boot.
+- **Boot time:** 1~ minute. CPU usage mild during boot.
 -  **RAM**: 1GB
 - **Time:** 1.6s
 -  **Prompt:** Who is Zarphus?
@@ -91,6 +91,7 @@ With newfound clarity and purpose, Tilse Sendas embraced the divine spark within
 
 
 **llama_indexer_local_tinyllama.py:**
+- **Boot time:** 1~ minute. CPU usage mild during boot.
 - **Time:** 5s
 -  **RAM**: 1.5GB
 -  **VRAM**: Can go up to 6-7GB in my tests. If you don't have that much VRAM force it to RAM.
