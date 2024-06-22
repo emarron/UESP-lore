@@ -1,6 +1,7 @@
 
 
 
+
   
   
 
@@ -10,10 +11,13 @@
 
 This project utilizes `llamaindex` on top of `ChatGPT-3.5` or a local `ollama` install to enable users to ask questions about Elder Scrolls lore. It references a list of 7,000 topics from the UESP wiki. Specifically that which were under the designation "Lore".
 
-If you hate installing stuff you can try this when it actually starts working (Its very slow):
-  
+ There **IS** a hugging faces demo of the **worst model working at the slowest speed**, I wouldn't recommend using it unless you have a potato PC and can't get ChatGPT API key:
+ 
 [HuggingFaces Demo](https://huggingface.co/spaces/emarron/elderscrolls_lore_bot
 )
+Read below for more information about the models in general. Or just skip to TIER LIST for the list of models and their stats.
+
+# General info:
 
 This is not a chat system with a lot of memory so as soon as you move to a new question, it won't remember your previous query (usually).
 
@@ -72,26 +76,31 @@ With newfound clarity and purpose, Tilse Sendas embraced the divine spark within
   
 
 **llama_indexer_chatgpt.py:**
+- **Boot time:** 2 minutes. CPU usage mild during boot.
+-  **RAM**: 1GB
 - **Time:** 1.6s
-
 -  **Prompt:** Who is Zarphus?
-
 -  **Response:** Zaraphus was a Demi-Lich who possessed a special diamond with magical properties, including the ability to show the owner the location of the Crystal Tower. He lost this gem when he was defeated in fair combat by the Mages Guild Loremaster Corim Ashlen.
 
 **llama_indexer_local_ollama.py:**
+- **Boot time:** 1~ minute. CPU usage mild during boot.
+-  **RAM**: 1GB
+-  **VRAM**: Can go up to 6-7GB in my tests. If you don't have that much VRAM force it to RAM.
 - **Time:** 4s
-
 -  **Prompt:** Who is Zarphus?
-
 -  **Response:** Zaraphus was a Demi-Lich who possessed a special diamond that had several magical properties including the ability to show the owner the location of the Crystal Tower. It is unknown how Zaraphus obtained this gem but he was relieved of it when he was defeated in fair combat by the Mages Guild Loremaster Corim Ashlen.
 
 
 **llama_indexer_local_tinyllama.py:**
-- **Time:** 8.7s
+- **Time:** 5s
+-  **RAM**: 1.5GB
+-  **VRAM**: Can go up to 6-7GB in my tests. If you don't have that much VRAM force it to RAM.
+
 -  **Prompt:** Who is Zarphus?
 - **Response:** Zarphus (fl. before 3E 389) was a Demi-Lich who possessed a special diamond that had several magical properties including the ability to show the owner the location of the Crystal Tower . It is unknown how Zarphus obtained this gem but he was relieved of it when he was defeated in fair combat by the Mages Guild Loremaster Corim Ashlen . [1] Mane Zebiden-jo (fl. ~ 2E 182 ) [ edit ] Zebiden-jo (or Zibbiden-jo ) was the Mane of the Khajiiti people during the early Second Era , before the unification of the Sixteen Kingdoms. Little is known about Zebiden-jo's life. It is known, however, that he faced one of his parent's spirit and Argonian soul reavers during his trials to become the Mane circa 2E 182 . The trials reflected the challenges faced before their ascension. He died at some point before the unification of Elsweyr and formation of the Elsweyr Confederacy in 2E 309 . His remains
 
-**Hugging Faces which uses llama_indexer_local_tinyllama.py**
+**Hugging Faces which uses llama_indexer_local_tinyllama.py** (Since tinyllama is tiny it doesn't require much RAM to load it. Ollama uses black magic to give you good results without using 32gb of ram like LLama3 usually does. Anyway this is why its used in the Hugging Faces Demo)
+
 - **Time:** 170s
 
 -  **Prompt:** Who is Zarphus?
