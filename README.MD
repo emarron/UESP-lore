@@ -8,7 +8,7 @@
 
 This project utilizes `llamaindex` on top of `ChatGPT-3.5` or a local `ollama` install to enable users to ask questions about Elder Scrolls lore. It references a list of 7,000 topics from the UESP wiki, specifically those under the "Lore" designation.
 
-The Hugging Faces Demo uses [Meta-Llama-3-8B-Instruct](https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct) with BGE embeddings.
+The Hugging Faces Demo uses [Meta-Llama-3-8B-Instruct](https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct) with BGE embeddings. The huggingfaces demo is being constantly updated until I can get a good balance of quality and speed. Right now it's 'okay' compared to the local models. 
 
 [Hugging Faces Demo](https://huggingface.co/spaces/emarron/elderscrolls_lore_bot)
 
@@ -51,10 +51,12 @@ With newfound clarity and purpose, Tilse Sendas embraced the divine spark within
 
 ## TIER LIST:
 
-1. Hugging Faces (Meta-Llama-3-8B-Instruct) is the easiest to use and has no requirements for hardware.
+
 1. ChatGPT version works the best and is fastest. However, you need an API key and maybe 1 USD. 
 2. Local Ollama is about the same as the Hugging Faces version (uses a flavor of Llama3) and can get slow if you don't have a GPU hooked up with torch (or a low power GPU).
-3. Alternative Models: Qwen2-1-5b, Tinyllama-1, phi3-mini. These should only be used in a case where you have a lack of space. Qwen2 is okayish, Tinyllama is not good, Phi3 is a pain to get to run without a docker container.
+3. Hugging Faces (Meta-Llama-3-8B-Instruct) is the easiest to use and has no requirements for hardware. 
+4. Alternative Models: Qwen2-1-5b, Tinyllama-1, phi3-mini. These should only be used in a case where you have a lack of space. Qwen2 is okayish, Tinyllama is not good, Phi3 is a pain to get to run without a docker container.
+
 ### Examples of Same Query
 
 **ChatGPT-3.5:**
