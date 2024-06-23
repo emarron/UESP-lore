@@ -30,7 +30,7 @@ The bottom is a more detailed explaination while also still being simple.
 
 For more info than that just search "LLM vector embeddings what are they?"
 
-[img]https://github.com/emarron/UESP-lore/blob/master/How%20Vector%20Embeddings%20Work.drawio.png[/img]
+!(https://github.com/emarron/UESP-lore/blob/master/How%20Vector%20Embeddings%20Work.drawio.png)
 
 # Example:
 
