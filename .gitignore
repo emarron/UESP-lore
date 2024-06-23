@@ -57,3 +57,4 @@ articles_categorized/
 DUMPS/
 storage2/
 *.7z
+/dockerfile

@@ -14,27 +14,27 @@ from transformers import BitsAndBytesConfig
 load_dotenv()
 
 # Path to your local corpus directory
-PERSIST_DIR = './storage_local_tinyllama'
+PERSIST_DIR = './storage_local_phi3_mini_128k_instruct'
 corpus_directory = 'articles'
 
-quantization_config = BitsAndBytesConfig(
-    load_in_4bit=True,
-    # bnb_4bit_compute_dtype=torch.float16,
-    # bnb_4bit_quant_type="nf4",
-    # bnb_4bit_use_double_quant=True,
-)
+# quantizatizon_config = BitsAndBytesConfig(
+#     load_in_4bit=True,
+#     # bnb_4bit_compute_dtype=torch.float16,
+#     # bnb_4bit_quant_type="nf4",
+#     # bnb_4bit_use_double_quant=True,
+# )
 
 # Configure the settings
 Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-base-en-v1.5")
 
 Settings.llm = HuggingFaceLLM(
-    model_name="TinyLlama/TinyLlama-1.1B-Chat-v1.0",
-    tokenizer_name="TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+    model_name="microsoft/Phi-3-mini-128k-instruct",
+    tokenizer_name="microsoft/Phi-3-mini-128k-instruct",
     context_window=2048,
     max_new_tokens=256,
-    model_kwargs={"quantization_config": quantization_config},
+    # model_kwargs={"quantization_config": quantization_config},
     generate_kwargs={"temperature": 0.7, "top_k": 50, "top_p": 0.95},
-    device_map="cuda", # try to force this to cuda.
+    device_map="auto", # try to force this to cuda.
 )
 
 if not os.path.exists(PERSIST_DIR):

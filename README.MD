@@ -1,51 +1,43 @@
 
 
 
-
   
   
 
 # Elder Scrolls Lore Chatbot
 
-  
+This project utilizes `llamaindex` on top of `ChatGPT-3.5` or a local `ollama` install to enable users to ask questions about Elder Scrolls lore. It references a list of 7,000 topics from the UESP wiki, specifically those under the "Lore" designation.
 
-This project utilizes `llamaindex` on top of `ChatGPT-3.5` or a local `ollama` install to enable users to ask questions about Elder Scrolls lore. It references a list of 7,000 topics from the UESP wiki. Specifically that which were under the designation "Lore".
+The Hugging Faces Demo uses [Meta-Llama-3-8B-Instruct](https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct) with BGE embeddings.
 
- There **IS** a hugging faces demo of the **worst model working at the slowest speed**, I wouldn't recommend using it unless you have a potato PC and can't get ChatGPT API key:
+[Hugging Faces Demo](https://huggingface.co/spaces/emarron/elderscrolls_lore_bot)
+
+Read below for more information about the system in general, or skip to the TIER LIST for the list of model/indexes pairs and my opinion on them.
+
+This is not a chat system with extensive memory, so once you move to a new question, it usually won't remember your previous query.
+
+These indexes are designed to answer questions about Elder Scrolls Lore, not to create new content. However, they can occasionally generate new ideas if prompted in the right way.
+
+Please take everything generated with a **grain of salt**. 
+
+# Example:
+
+### **Lore Question:**
+
+**Prompt:** how does chim relate to dragonbreak
+
+**Response:** CHIM is a state of enlightenment in the Elder Scrolls lore where one realizes the true nature of the universe and their place within it. It is achieved by understanding the illusory nature of reality and asserting one's individuality within that illusion. CHIM is said to grant individuals god-like powers, allowing them to manipulate reality. In the context of Dragon Breaks, CHIM is sometimes associated with the ability to maintain individuality and coherence during the chaotic and non-linear time of a Dragon Break. Some believe that those who have achieved CHIM may be able to navigate and even influence events during a Dragon Break due to their understanding of the true nature of existence.
+
+###  **Asking for a story:**
+
+ **Prompt:** write me a story about a dunmer overcoming skooma
  
+**Response:** A Dunmer named Tilse Sendas shared her personal journey of overcoming skooma addiction. She described the initial infatuation, the intense obsession, and the deep degradation caused by her addiction. Through her narrative, Tilse revealed that the key to breaking free from the shackles of skooma lay in understanding and accepting the allure of the drug, as well as letting go of the shame associated with it. She emphasized that there was no magical cure or potion, but rather a path of self-awareness and choice. Tilse's story challenged the common belief that once enslaved by skooma, one could never break free, proving that redemption was possible through self-empowerment and a shift in perspective.
 
-Read below for more information about the models in general. Or just skip to TIER LIST for the list of models and their stats.
+**human conclusion:** you might want to go check the wiki because that sure sounds like a book. Check the name Tilse Sendas. You will find this book: https://en.uesp.net/wiki/Lore:Confessions_of_a_Skooma-Eater
 
-# General info:
 
-This is not a chat system with a lot of memory so as soon as you move to a new question, it won't remember your previous query (usually).
-
-In general I am highly satisfied with the ChatGPT version, satisfied with the local Ollama, not happy with tinyllama, and very disappointed in the huggingfaces (tinyllama) version.
-
-These models are for answering questions about Elder Scrolls Lore not coming up with new stuff although they can occasionally do that if you poke it in the right way.
-
- I would advise everything to be taken **with a grain of salt**, and these models should be used as a tool to more efficiently browse for elder scrolls lore. It's not really for generating new content but answering questions you may have.
- 
-
-**e.g: Lore Question:**
-
-**prompt:** how does chim relate to dragonbreak
-
-**response:** CHIM is a state of enlightenment in the Elder Scrolls lore where one realizes the true nature of the universe and their place within it. It is achieved by understanding the illusory nature of reality and asserting one's individuality within that illusion. CHIM is said to grant individuals god-like powers, allowing them to manipulate reality. In the context of Dragon Breaks, CHIM is sometimes associated with the ability to maintain individuality and coherence during the chaotic and non-linear time of a Dragon Break. Some believe that those who have achieved CHIM may be able to navigate and even influence events during a Dragon Break due to their understanding of the true nature of existence.
-
- **e.g asking for a story:**
-
- **prompt:** "write me a story about a dunmer overcoming skooma"
- 
-**response:** "A Dunmer named Tilse Sendas shared her personal journey of overcoming skooma addiction. She described the initial infatuation, the intense obsession, and the deep degradation caused by her addiction. Through her narrative, Tilse revealed that the key to breaking free from the shackles of skooma lay in understanding and accepting the allure of the drug, as well as letting go of the shame associated with it. She emphasized that there was no magical cure or potion, but rather a path of self-awareness and choice. Tilse's story challenged the common belief that once enslaved by skooma, one could never break free, proving that redemption was possible through self-empowerment and a shift in perspective."
-
-**human conclusion:** you might want to go check the wiki because that sure sounds like a book. Check the name Tilse Sendas.
-
-**wiki result:** https://en.uesp.net/wiki/Lore:Confessions_of_a_Skooma-Eater
-
-finally
-
-**e.g asking for a story based on the last two prompts:**
+### **Asking for a story by combining the two prompts:**
 
 **prompt:** "write me a story about Tilse Sendas while high on skooma achieving chim"
 
@@ -57,12 +49,12 @@ With newfound clarity and purpose, Tilse Sendas embraced the divine spark within
 
 **human conclusion:** Yep that sure sounds like the elder scrolls.
 
-### TIER LIST:
+## TIER LIST:
 
-1. ChatGPT version as it works the best and it is the fastest. I think you can have a chatGPT API key for free so why not.
-2. Local Ollama is not as good as chatgpt and can get slow if you don't have a GPU hooked up with torch (or a low power GPU).
-3. Local TinyLlama is here just because I have it, it's the local version of the Hugging Faces Demo.
-4. Hugging faces demo is to see if you like the general vibe. It's very... not good.
+1. Hugging Faces (Meta-Llama-3-8B-Instruct) is the easiest to use and has no requirements for hardware.
+1. ChatGPT version works the best and is fastest. However, you need an API key and maybe 1 USD. 
+2. Local Ollama is about the same as the Hugging Faces version (uses a flavor of Llama3) and can get slow if you don't have a GPU hooked up with torch (or a low power GPU).
+3. Alternative Models: Qwen2-1-5b, Tinyllama-1, phi3-mini. These should only be used in a case where you have a lack of space. Qwen2 is okayish, Tinyllama is not good, Phi3 is a pain to get to run without a docker container.
 ### Examples of Same Query
 
 **ChatGPT-3.5:**
@@ -72,41 +64,42 @@ With newfound clarity and purpose, Tilse Sendas embraced the divine spark within
 
 -  **Response:** Zarphus doesn't appear to be a widely recognized figure or entity in history, mythology, or popular culture based on available information. If you have more context or details about Zarphus, I could try to provide a more specific answer!
 
-  
+**Hugging Faces (Meta-Llama-3-8B-Instruct + BGE)**
+- **Time:** 10-20s
 
-**llama_indexer_chatgpt.py:**
-- **Boot time:** 1~ minute. CPU usage mild during boot.
--  **RAM**: 1GB
-- **Time:** 1.6s
 -  **Prompt:** Who is Zarphus?
--  **Response:** Zaraphus was a Demi-Lich who possessed a special diamond with magical properties, including the ability to show the owner the location of the Crystal Tower. He lost this gem when he was defeated in fair combat by the Mages Guild Loremaster Corim Ashlen.
 
-**llama_indexer_local_ollama.py:**
-- **Boot time:** 1~ minute. CPU usage mild during boot.
--  **RAM**: 1GB
--  **VRAM**: Can go up to 6-7GB in my tests. If you don't have that much VRAM force it to RAM.
-- **Time:** 4s
--  **Prompt:** Who is Zarphus?
 -  **Response:** Zaraphus was a Demi-Lich who possessed a special diamond that had several magical properties including the ability to show the owner the location of the Crystal Tower. It is unknown how Zaraphus obtained this gem but he was relieved of it when he was defeated in fair combat by the Mages Guild Loremaster Corim Ashlen.
 
 
-**llama_indexer_local_tinyllama.py:**
+**llama_indexer_chatgpt.py (chatgpt 3.5 + ada):**
 - **Boot time:** 1~ minute. CPU usage mild during boot.
-- **Time:** 5s
--  **RAM**: 1.5GB
--  **VRAM**: Can go up to 6-7GB in my tests. If you don't have that much VRAM force it to RAM.
+-  **RAM**: 1GB
+- **Time:** 1.6s
 
+-  **Prompt:** Who is Zarphus?
+
+-  **Response:** Zaraphus was a Demi-Lich who possessed a special diamond with magical properties, including the ability to show the owner the location of the Crystal Tower. He lost this gem when he was defeated in fair combat by the Mages Guild Loremaster Corim Ashlen.
+
+**llama_indexer_local_ollama.py (Ollama llama3 + BGE):**
+- **Boot time:** 1~ minute. CPU usage mild during boot.
+-  **RAM**: 1GB
+-  **VRAM**: Can go up to 6-7GB in my tests. If you don't have that much VRAM force it to RAM. Uses some black magic to not consume 32GB.
+
+- **Time:** 4s
+
+-  **Prompt:** Who is Zarphus?
+
+-  **Response:** Zaraphus was a Demi-Lich who possessed a special diamond that had several magical properties including the ability to show the owner the location of the Crystal Tower. It is unknown how Zaraphus obtained this gem but he was relieved of it when he was defeated in fair combat by the Mages Guild Loremaster Corim Ashlen.
+
+
+**llama_indexer_local_tinyllama.py (TinyLlama-1.1B-Chat-V1.0 + BGE):**
+- **Time:** 8.7s
+- **Boot time:** 1~ minute. CPU usage mild during boot.
+-  **RAM**: 1GB
+-  **VRAM**: Can go up to 6-7GB in my tests. If you don't have that much VRAM force it to RAM.
 -  **Prompt:** Who is Zarphus?
 - **Response:** Zarphus (fl. before 3E 389) was a Demi-Lich who possessed a special diamond that had several magical properties including the ability to show the owner the location of the Crystal Tower . It is unknown how Zarphus obtained this gem but he was relieved of it when he was defeated in fair combat by the Mages Guild Loremaster Corim Ashlen . [1] Mane Zebiden-jo (fl. ~ 2E 182 ) [ edit ] Zebiden-jo (or Zibbiden-jo ) was the Mane of the Khajiiti people during the early Second Era , before the unification of the Sixteen Kingdoms. Little is known about Zebiden-jo's life. It is known, however, that he faced one of his parent's spirit and Argonian soul reavers during his trials to become the Mane circa 2E 182 . The trials reflected the challenges faced before their ascension. He died at some point before the unification of Elsweyr and formation of the Elsweyr Confederacy in 2E 309 . His remains
-
-**[HuggingFaces Demo](https://huggingface.co/spaces/emarron/elderscrolls_lore_bot
-) which uses llama_indexer_local_tinyllama.py** (Since tinyllama is tiny it doesn't require much RAM to load it. This is also why it sucks.)
-
-- **Time:** 170s
-
--  **Prompt:** Who is Zarphus?
-
--  **Response:** Zarphus (fl. before 3E 389) [ edit ] Zarphus was a Demi-Lich who possessed a special diamond that had several magical properties including the ability to show the owner the location of the Crystal Tower . It is unknown how Zarphus obtained this gem but he was relieved of it when he was defeated in fair combat by the Mages Guild Loremaster Corim Ashlen . [1] Mane Zebiden-jo (fl. ~ 2E 182 ) [ edit ] Zebiden-jo (or Zibbiden-jo ) was the Mane of the Khajiiti people during the early Second Era , before the unification of the Sixteen Kingdoms. Little is known about Zebiden-jo's life. It is known, however, that he faced one of his parent's spirit and Argonian soul reavers during his trials to become the Mane circa 2E 182 . The trials reflected the challenges faced before their ascension. He died at some point before the unification of Elsweyr and formation of the Elsweyr Confederacy in 2E 
 
 
 ## Getting Started
@@ -117,7 +110,7 @@ With newfound clarity and purpose, Tilse Sendas embraced the divine spark within
 
 - A ChatGPT API key for chatgpt version - See step 4.
 - Ollama installed for local_ollama - See step 4.
-- (maybe) HuggingFaces API key for local_tinyllama - See step 4.
+- HuggingFaces API key + Permissions for certain alternative models. This is for advanced users.
 
 - Python 3.8 or higher
 
@@ -144,6 +137,7 @@ cd elder-scrolls-lore-chatbot
 
 2.  **Download Storage Folder**
 
+I have put in safeguards to prevent you from using the wrong index for different models. Each model needs a distinct index.
   
 CHATGPT:
 Download the storage folder from [\[Here\]](https://www.mediafire.com/file/0awjd9hcds0dg7e/storage_ada_gpt_3-5-turbo.7z/file) and place it in the project root directory.
@@ -151,11 +145,6 @@ Download the storage folder from [\[Here\]](https://www.mediafire.com/file/0awjd
 OLLAMA:
 Download the storage folder from [\[Here\]](https://www.mediafire.com/file/nc1wxmdwzje4j6t/storage_bge-base-en-v1-5_local_llama3.7z/file) and place it in the project root directory.
 
-TINYLLAMA:
-Download the storage folder from [\[Here\]](https://www.mediafire.com/file/5o5k3wmehvhacoc/storage_bge-base-en-v1-5_TinyLlama-1-1B-Chat-v1-0.7z/file) and place it in the project root directory.
-
-
-  
 
 3.  **Install Dependencies**
 
@@ -167,12 +156,14 @@ pip install -r requirements.txt
 
 ```
 
+If you are using some of the alternative models you may need additonal dependencies. Further if you want to utilize your GPU you need [CUDA](https://developer.nvidia.com/cuda-toolkit) and [pytorch built for CUDA](https://pytorch.org/get-started/locally/).
+
 4. **Donwload Ollama (local_ollama ONLY)**
 
 If using the local version you need Ollama: [\[Here\]](https://ollama.com/download)
   
 
-4.  **Set Up Environment Variables (CHATGPT and local_tinyllama ONLY)**
+4.  **Set Up Environment Variables (CHATGPT and Alternatives)**
 
   
 
@@ -186,7 +177,7 @@ CHATGPT_API_KEY=your_api_key_here
 HF_KEY=your_huggingfaces_api_key_here
 
 ```
-The Hugging Faces key **might** be required for the TinyLlama version, but I don't know, you shouldn't use it anyway.
+The Hugging Faces key **might** be required for Alternative versions, but I don't know, you shouldn't use it anyway.
 
   
 
@@ -194,7 +185,7 @@ The Hugging Faces key **might** be required for the TinyLlama version, but I don
 
 -  `llama_indexer_local_ollama.py`: This is the local version, and it is slow but free.
 -  `llama_indexer_chatgpt.py`: This is the chatgpt version which is also more or less free unless you make a lot of requests to chatgpt.
--  `llama_indexer_local_tinyllama.py` This is the worst version, and is somehow slower than local_ollama (at least on my machine).
+- `alternative_models`: Where the aforementioned alternative versions are.
 -  `cleaning_HTML directory`: Cleans HTML data, requires `beautifulsoup4`.
 
 -  `cleaning_ARTICLES directory`: Further processing and cleaning of articles.
@@ -219,8 +210,10 @@ The Hugging Faces key **might** be required for the TinyLlama version, but I don
 **EMBEDDINGS**: storage_(EMBEDDING_METHOD)_(LLM):
 - storage_ada_gpt_3-5-turbo: this is for the chatgpt version
 - storage_bge-base-en-v1-5_local_llama3: this is for the local ollama version
-- storage_bge-base-en-v1-5_Meta-Llama-3-8B-Instruct: this was for a hugging faces version, but it was too computationally expensive for the free gradio I'm using.
-- storage_bge-base-en-v1-5_TinyLlama-1-1B-Chat-v1-0: this is the one paired with the hugging faces demo.
+- storage_bge-base-en-v1-5_Meta-Llama-3-8B-Instruct: Hugging Faces is using this one.
+- storage_bge-base-en-v1-5_TinyLlama-1-1B-Chat-v1-0: For TinyLlama 1B Chat
+- storage_bge_base_en_v1-5_Phi-3-mini-128k-instruct: For Phi-3-mini 128k instruct
+- storage_bge_base_en_v1-5_Qwen2-1-5B-Instruct: For Qwen2 1.5B instruct
 ### Usage
 
   
@@ -244,14 +237,8 @@ python llama_indexer_chatgpt.py
 python llama_indexer_local_ollama.py
 
 ```
- or if you hate yourself
-```bash
 
-python llama_indexer_local_tinyllama.py
-
-```
-
-All of them will pop up with a 
+After a bit of processing the terminal will pop up with a 
 
 ```
 Running on local URL:  http://127.0.0.1:7860
