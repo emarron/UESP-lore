@@ -1,6 +1,7 @@
 
 
 
+
   
   
 
@@ -20,17 +21,17 @@ These indexes are designed to answer questions about Elder Scrolls Lore, not to 
 
 Please take everything generated with a **grain of salt**. 
 
-To understand what I am specifically offering its VECTOR EMBEDDINGS. This diagram should help.
+To understand what I am specifically offering it's **VECTOR EMBEDDINGS**. This diagram should help.
 
-The top is a normal path
+The top is a normal path.
 
-The second is using vector embeddings
+The second is using vector embeddings.
 
-The bottom is a more detailed explaination while also still being simple. 
+The bottom is a more detailed explanation while also still being simple.
 
 For more info than that just search "LLM vector embeddings what are they?"
 
-!(https://github.com/emarron/UESP-lore/blob/master/How%20Vector%20Embeddings%20Work.drawio.png)
+![](https://github.com/emarron/UESP-lore/blob/master/How%20Vector%20Embeddings%20Work.drawio.png?raw=true)
 
 # Example:
 
@@ -71,6 +72,11 @@ With newfound clarity and purpose, Tilse Sendas embraced the divine spark within
 
 ### Examples of Same Query
 
+This will consist of comparing **regular chatgpt** versus various embeddings + models.  All embeddings are referencing the same corpus (articles).
+
+Structure is python file/other (Model + embedding system)
+
+**Regular ChatGPT:**
 **ChatGPT-3.5:**
 - **Time:** 1s
 
@@ -78,6 +84,8 @@ With newfound clarity and purpose, Tilse Sendas embraced the divine spark within
 
 -  **Response:** Zarphus doesn't appear to be a widely recognized figure or entity in history, mythology, or popular culture based on available information. If you have more context or details about Zarphus, I could try to provide a more specific answer!
 
+
+**Embedded Models Start:**
 **Hugging Faces (Meta-Llama-3-8B-Instruct + BGE)**
 - **Time:** 10-20s
 
