@@ -20,6 +20,18 @@ These indexes are designed to answer questions about Elder Scrolls Lore, not to 
 
 Please take everything generated with a **grain of salt**. 
 
+To understand what I am specifically offering its VECTOR EMBEDDINGS. This diagram should help.
+
+The top is a normal path
+
+The second is using vector embeddings
+
+The bottom is a more detailed explaination while also still being simple. 
+
+For more info than that just search "LLM vector embeddings what are they?"
+
+[img]https://github.com/emarron/UESP-lore/blob/master/How%20Vector%20Embeddings%20Work.drawio.png[/img]
+
 # Example:
 
 ### **Lore Question:**
