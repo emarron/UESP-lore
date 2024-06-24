@@ -2,6 +2,7 @@
 
 
 
+
   
   
 
@@ -9,7 +10,7 @@
 
 This project utilizes `llamaindex` on top of `ChatGPT-3.5` or a local `ollama` install to enable users to ask questions about Elder Scrolls lore. It references a list of 7,000 topics from the UESP wiki, specifically those under the "Lore" designation.
 
-The Hugging Faces Demo uses [Meta-Llama-3-8B-Instruct](https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct) with BGE embeddings. The huggingfaces demo is being constantly updated until I can get a good balance of quality and speed. Right now it's 'okay' compared to the local models. 
+The Hugging Faces Demo uses [Meta-Llama-3-8B-Instruct](https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct) with BGE embeddings. The huggingfaces demo is being constantly updated until I can get a good balance of quality and speed. It is not very good compared to the local models. 
 
 [Hugging Faces Demo](https://huggingface.co/spaces/emarron/elderscrolls_lore_bot)
 
@@ -36,6 +37,8 @@ For more info than that just search "LLM vector embeddings what are they?"
 # Example:
 
 ### **Lore Question:**
+
+This is using the chatgpt 3.5 turbo + ada embeddings of the 7,000 UESP articles.
 
 **Prompt:** how does chim relate to dragonbreak
 
@@ -113,15 +116,6 @@ Structure is python file/other (Model + embedding system)
 -  **Prompt:** Who is Zarphus?
 
 -  **Response:** Zaraphus was a Demi-Lich who possessed a special diamond that had several magical properties including the ability to show the owner the location of the Crystal Tower. It is unknown how Zaraphus obtained this gem but he was relieved of it when he was defeated in fair combat by the Mages Guild Loremaster Corim Ashlen.
-
-
-**llama_indexer_local_tinyllama.py (TinyLlama-1.1B-Chat-V1.0 + BGE):**
-- **Time:** 8.7s
-- **Boot time:** 1~ minute. CPU usage mild during boot.
--  **RAM**: 1GB
--  **VRAM**: Can go up to 6-7GB in my tests. If you don't have that much VRAM force it to RAM.
--  **Prompt:** Who is Zarphus?
-- **Response:** Zarphus (fl. before 3E 389) was a Demi-Lich who possessed a special diamond that had several magical properties including the ability to show the owner the location of the Crystal Tower . It is unknown how Zarphus obtained this gem but he was relieved of it when he was defeated in fair combat by the Mages Guild Loremaster Corim Ashlen . [1] Mane Zebiden-jo (fl. ~ 2E 182 ) [ edit ] Zebiden-jo (or Zibbiden-jo ) was the Mane of the Khajiiti people during the early Second Era , before the unification of the Sixteen Kingdoms. Little is known about Zebiden-jo's life. It is known, however, that he faced one of his parent's spirit and Argonian soul reavers during his trials to become the Mane circa 2E 182 . The trials reflected the challenges faced before their ascension. He died at some point before the unification of Elsweyr and formation of the Elsweyr Confederacy in 2E 309 . His remains
 
 
 ## Getting Started
@@ -216,6 +210,8 @@ The Hugging Faces key **might** be required for Alternative versions, but I don'
 
 -  `failures`: Contains attempts to create an independent small LLM or LoRA that were unsuccessful due to being not good or taking forever.
 
+- `chatbot resources`: contains resource python files
+- `model configs`: contains configs for hugging faces sourced models.
   
 
 ### Optional Data
@@ -226,8 +222,8 @@ The Hugging Faces key **might** be required for Alternative versions, but I don'
 
 **DATA**: All of these contain over 7,000 articles.
 - articles: the training set as json
-- articles_categorized: same thing as articles but just in subdirectories. e.g: People, Books, Places...
 - UESP_LORE_DUMP: raw html from the UESP wiki where page was present in [Lore](https://en.uesp.net/wiki/Special:AllPages?from=&to=&namespace=130&hideredirects=1). 
+- IMPERIAL_LIBRARY_DUMP: raw html from the imperial library
 
 **EMBEDDINGS**: storage_(EMBEDDING_METHOD)_(LLM):
 - storage_ada_gpt_3-5-turbo: this is for the chatgpt version
@@ -236,6 +232,8 @@ The Hugging Faces key **might** be required for Alternative versions, but I don'
 - storage_bge-base-en-v1-5_TinyLlama-1-1B-Chat-v1-0: For TinyLlama 1B Chat
 - storage_bge_base_en_v1-5_Phi-3-mini-128k-instruct: For Phi-3-mini 128k instruct
 - storage_bge_base_en_v1-5_Qwen2-1-5B-Instruct: For Qwen2 1.5B instruct
+
+At later dates I may revise these embeddings by changing the dataset. Currently I am working on implementing a tagging system.
 ### Usage
 
   
