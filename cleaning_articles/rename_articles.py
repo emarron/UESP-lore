@@ -1,5 +1,8 @@
 import json
+import re
 from pathlib import Path
+
+from chat_bot_resources.config import DATA_DIRECTORY
 
 
 def process_json_files(directory):
@@ -14,6 +17,20 @@ def process_json_files(directory):
             data = json.load(file)
 
         # Process the JSON content
+        def clean_value(value):
+            if isinstance(value, str):
+                # Remove newlines and replace with space
+                value = value.replace('\n', ' ')
+                # Remove text within square brackets
+                value = re.sub(r'\[.*?\]', '', value)
+                return value
+            elif isinstance(value, dict):
+                return {k: clean_value(v) for k, v in value.items()}
+            elif isinstance(value, list):
+                return [clean_value(v) for v in value]
+            else:
+                return value
+
         def remove_lore_prefix(item):
             if isinstance(item, str):
                 return item[5:] if item.startswith('Lore:') else item
@@ -24,7 +41,10 @@ def process_json_files(directory):
             else:
                 return item
 
+        # First remove the Lore prefix
         processed_data = remove_lore_prefix(data)
+        # Then clean the values
+        processed_data = clean_value(processed_data)
 
         # Write the processed data back to a new file
         with new_file_path.open('w', encoding='utf-8') as file:
@@ -36,7 +56,6 @@ def process_json_files(directory):
 
     print("Processing complete.")
 
-
 # Usage
-directory = Path('CLEANED_OUTPUT')
+directory = Path(DATA_DIRECTORY)
 process_json_files(directory)

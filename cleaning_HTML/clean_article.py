@@ -4,10 +4,41 @@ from pathlib import Path
 from bs4 import BeautifulSoup
 
 # page types:Appendices,Alchemy,Artifacts,Bestiary,Cuisine,Factions,Flora,Gods,History,Linguistics,Magic,Minerals,Names,Races,
-# page types_special: Books, Locations, People
+# page types_special: Books, Places, People
 
-article_types = []
-article_types_special = ["Books"]
+article_types = [
+    "Appendices",
+    "Alchemy",
+    "Artifacts",
+    "Bestiary",
+    "Cuisine",
+    "Factions",
+    "Flora",
+    "Gods",
+    "History",
+    "Linguistics",
+    "Magic",
+    "Minerals",
+    "Names",
+    "Races"
+]
+# article_types = []
+
+article_types_special = [
+    "Books",
+    "Places",
+    "People"
+]
+
+
+def extract_references(content_div):
+    references_section = content_div.find('div', class_='mw-references-wrap')
+    references = []
+    if references_section:
+        for li in references_section.find_all('li'):
+            ref_text = li.get_text(separator=' ', strip=True)
+            references.append(ref_text)
+    return references
 
 
 def parse_page(file_path):
@@ -33,9 +64,18 @@ def parse_page(file_path):
         if element.name not in ['table', 'div']:
             content_text += element.get_text(separator=' ', strip=True) + ' '
 
+    # Removing the "References" ending from content_text if it exists
+    content_text = content_text.strip()
+    if content_text.endswith('References'):
+        content_text = content_text[:-len('References')].strip()
+
+    # Extracting references
+    references = extract_references(content_div)
+
     return {
         'Title': title,
-        'Contents': content_text.strip()
+        'Contents': content_text,
+        'References': references
     }
 
 
@@ -74,7 +114,7 @@ def parse_people_page(file_path):
     for gallery in content_div.find_all('div', class_='gallery'):
         gallery.decompose()
 
-    # Extract the main content text
+    # Extracting main content text until the references section
     content_text = ''
     references_section = content_div.find('div', class_='mw-references-wrap')
     for element in content_div.find_all(recursive=False):
@@ -83,10 +123,19 @@ def parse_people_page(file_path):
         if element.name not in ['table', 'div']:
             content_text += element.get_text(separator=' ', strip=True) + ' '
 
+    # Removing the "References" ending from content_text if it exists
+    content_text = content_text.strip()
+    if content_text.endswith('References'):
+        content_text = content_text[:-len('References')].strip()
+
+    # Extracting references
+    references = extract_references(content_div)
+
     return {
         'Title': title,
         'Contents': content_text.strip(),
-        'Basic_Info': basic_info
+        'Person_Info': basic_info,
+        'References': references
     }
 
 
@@ -124,7 +173,7 @@ def parse_places_page(file_path):
     for gallery in content_div.find_all('div', class_='gallery'):
         gallery.decompose()
 
-    # Extract the main content text
+    # Extracting main content text until the references section
     content_text = ''
     references_section = content_div.find('div', class_='mw-references-wrap')
     for element in content_div.find_all(recursive=False):
@@ -133,10 +182,19 @@ def parse_places_page(file_path):
         if element.name not in ['table', 'div']:
             content_text += element.get_text(separator=' ', strip=True) + ' '
 
+    # Removing the "References" ending from content_text if it exists
+    content_text = content_text.strip()
+    if content_text.endswith('References'):
+        content_text = content_text[:-len('References')].strip()
+
+    # Extracting references
+    references = extract_references(content_div)
+
     return {
         'Title': title,
         'Contents': content_text.strip(),
-        'Basic_Info': basic_info
+        'Place_Info': basic_info,
+        'References': references
     }
 
 
@@ -146,7 +204,11 @@ def parse_books_page(file_path):
 
     title = soup.find('h1', {'id': 'firstHeading'}).text.strip()
     info_box = soup.find('table', class_='infobox')
-    content_div = soup.find('div', class_='book')
+    content_div = soup.find('div', class_='book') or soup.find('div', class_='poem')
+
+    if not content_div:
+        print(f"Skipping non-book and non-poem file: {file_path.name}")
+        return {}
     if not content_div:
         print(f"Skipping non-book file: {file_path.name}")
         return {}
@@ -212,7 +274,7 @@ def process_html_files(directory, out_directory, article_types, article_types_sp
             soup = BeautifulSoup(file, 'html.parser')
 
             # Check for book pages
-            if soup.find('div', class_='book'):
+            if soup.find('div', class_='book') or soup.find('div', class_='poem'):
                 page_data = parse_books_page(file_path)
                 if page_data:
                     output_file = file_path.stem + '.json'
@@ -229,7 +291,7 @@ def process_html_files(directory, out_directory, article_types, article_types_sp
                 if subpages_span:
                     subpages_html = str(subpages_span)
                     matched_type = next((article_type for article_type in all_article_types
-                                         if f'<a href="/wiki/Lore:{article_type}"' in subpages_html), None)
+                                         if f'{article_type}' in subpages_html), None)
 
                     if matched_type:
                         parse_function = parsing_functions.get(matched_type, default_parse)
@@ -241,10 +303,20 @@ def process_html_files(directory, out_directory, article_types, article_types_sp
                             output_path.parent.mkdir(parents=True, exist_ok=True)
                             with output_path.open('w', encoding='utf-8') as outfile:
                                 json.dump(page_data, outfile, ensure_ascii=False, indent=4)
+                        continue
+
+            # If no category matches, classify as UNCLASSIFIED
+            page_data = default_parse(file_path)
+            if page_data:
+                output_file = file_path.stem + '.json'
+                output_path = out_directory_path / 'UNCLASSIFIED' / output_file
+                output_path.parent.mkdir(parents=True, exist_ok=True)
+                with output_path.open('w', encoding='utf-8') as outfile:
+                    json.dump(page_data, outfile, ensure_ascii=False, indent=4)
 
 
 def main():
-    in_dir = 'LORE_DUMP'
+    in_dir = 'DUMPS/UESP_LORE_DUMP'
     process_html_files(in_dir, 'CLEANED_OUTPUT', article_types, article_types_special)
 
 

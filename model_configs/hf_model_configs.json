@@ -1,0 +1,47 @@
+{
+    "Meta-Llama-3-8B": {
+        "embed_model": "BAAI/bge-base-en-v1.5",
+        "model_name": "meta-llama/Meta-Llama-3-8B",
+        "tokenizer_name": "meta-llama/Meta-Llama-3-8B",
+        "context_window": 2048,
+        "max_new_tokens": 256,
+        "generate_kwargs": {"temperature": 0.7, "top_k": 50, "top_p": 0.95, "do_sample": true}
+    },
+    "Qwen2-1-5B-Instruct": {
+        "embed_model": "BAAI/bge-large-en-v1.5",
+        "model_name": "Qwen/Qwen2-1.5B-Instruct",
+        "tokenizer_name": "Qwen/Qwen2-1.5B-Instruct",
+        "context_window": 2048,
+        "max_new_tokens": 256,
+        "generate_kwargs": {"temperature": 0.7, "top_k": 50, "top_p": 0.95, "do_sample": true}
+    },
+    "Phi-3-mini-128k-Instruct": {
+        "embed_model": "BAAI/bge-large-en-v1.5",
+        "model_name": "microsoft/Phi-3-mini-128k-instruct",
+        "tokenizer_name": "microsoft/Phi-3-mini-128k-instruct",
+        "context_window": 2048,
+        "max_new_tokens": 256,
+        "messages_to_prompt": "messages_to_prompt_phi",
+        "completion_to_prompt": "completion_to_prompt_phi",
+        "generate_kwargs": {"temperature": 0.7, "top_k": 50, "top_p": 0.95, "do_sample": true}
+    },
+    "Phi-3-small-128k-Instruct": {
+        "embed_model": "BAAI/bge-large-en-v1.5",
+        "model_name": "microsoft/Phi-3-small-128k-instruct",
+        "tokenizer_name": "microsoft/Phi-3-small-128k-instruct",
+        "context_window": 2048,
+        "max_new_tokens": 256,
+        "messages_to_prompt": "messages_to_prompt_phi",
+        "completion_to_prompt": "completion_to_prompt_phi",
+        "model_kwargs": {"trust_remote_code": true},
+        "generate_kwargs": {"temperature": 0.7, "top_k": 50, "top_p": 0.95, "do_sample": true}
+    },
+    "Mistral-7B-Instruct-v0-3": {
+        "embed_model": "BAAI/bge-large-en-v1.5",
+        "model_name": "mistralai/Mistral-7B-Instruct-v0.3",
+        "tokenizer_name": "mistralai/Mistral-7B-Instruct-v0.3",
+        "context_window": 2048,
+        "max_new_tokens": 256,
+        "generate_kwargs": {"temperature": 0.7, "top_k": 50, "top_p": 0.95, "do_sample": true}
+    }
+}
