@@ -18,11 +18,9 @@ def extract_content_from_html(file_path):
     main_content = soup.find("main", id="main", class_="site-main")
 
     if main_content:
-        text_content = main_content.get_text(separator="\n", strip=True)
+        return str(main_content), None
     else:
-        text_content = "Main content not found."
-
-    return text_content
+        return None, file_path
 
 def save_to_json(output_path, title, content):
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
@@ -34,6 +32,7 @@ def save_to_json(output_path, title, content):
         json.dump(data, json_file, ensure_ascii=False, indent=4)
 
 def process_files(root_dir, output_root):
+    not_found_list = []
     for subdir, _, files in os.walk(root_dir):
         for file in files:
             if file.endswith(".html"):
@@ -42,15 +41,20 @@ def process_files(root_dir, output_root):
                 output_path = os.path.join(output_root, relative_path).replace(".html", ".json")
 
                 title = os.path.splitext(file)[0]
-                content = extract_content_from_html(file_path)
+                content, not_found_path = extract_content_from_html(file_path)
 
-                save_to_json(output_path, title, content)
-                print(f"Processed and saved: {output_path}")
+                if content:
+                    save_to_json(output_path, title, content)
+                    print(f"Processed and saved: {output_path}")
+                else:
+                    not_found_list.append(not_found_path)
+                    print(f"Main content not found in: {file_path}")
+
+    return not_found_list
 
 root_directory = "DUMPS/imperial_library"  # Change to the root directory containing your HTML files
-output_directory = "imperial_libary_cleaned"  # Change to the desired output directory
+output_directory = "imperial_library_cleaned"  # Change to the desired output directory
 
-process_files(root_directory, output_directory)
-
-
-# pay special attention to game books as it has a synopsis for each book. this may prove valuable.
+not_found_files = process_files(root_directory, output_directory)
+print("Files with no main content found:")
+print(not_found_files)
