@@ -156,10 +156,10 @@ cd elder-scrolls-lore-chatbot
 I have put in safeguards to prevent you from using the wrong index for different models. Each model needs a distinct index.
   
 CHATGPT:
-Download the storage folder from [\[Here\]](https://www.mediafire.com/file/0awjd9hcds0dg7e/storage_ada_gpt_3-5-turbo.7z/file) and place it in the project root directory.
+Download the storage folder from [\[Here\]](https://www.mediafire.com/file/zr9yl4n5s044c1s/storage_ada_chatgpt.7z/file) and place it in the project root directory.
 
 OLLAMA:
-Download the storage folder from [\[Here\]](https://www.mediafire.com/file/nc1wxmdwzje4j6t/storage_bge-base-en-v1-5_local_llama3.7z/file) and place it in the project root directory.
+Download the storage folder from [\[Here\]](https://www.mediafire.com/file/d210ifr8huhhrua/storage_bge-large-en-v1-5_local_ollama_llama3.7z/file) and place it in the project root directory.
 
 
 3.  **Install Dependencies**
@@ -174,7 +174,7 @@ pip install -r requirements.txt
 
 If you are using some of the alternative models you may need additonal dependencies. Further if you want to utilize your GPU you need [CUDA](https://developer.nvidia.com/cuda-toolkit) and [pytorch built for CUDA](https://pytorch.org/get-started/locally/).
 
-4. **Donwload Ollama (local_ollama ONLY)**
+4. **Download Ollama (local_ollama ONLY)**
 
 If using the local version you need Ollama: [\[Here\]](https://ollama.com/download)
   
@@ -201,8 +201,7 @@ The Hugging Faces key **might** be required for Alternative versions, but I don'
 
 -  `llama_indexer_local_ollama.py`: This is the local version, and it is slow but free.
 -  `llama_indexer_chatgpt.py`: This is the chatgpt version which is also more or less free unless you make a lot of requests to chatgpt.
-- `alternative_models`: Where the aforementioned alternative versions are.
--  `cleaning_HTML directory`: Cleans HTML data, requires `beautifulsoup4`.
+- `llama_indexer_hf_type.py`: Where the aforementioned alternative versions are. This is an experimental file and uses the `requirements_full.txt`.-  `cleaning_HTML directory`: Cleans HTML data, requires `beautifulsoup4`.
 
 -  `cleaning_ARTICLES directory`: Further processing and cleaning of articles.
 

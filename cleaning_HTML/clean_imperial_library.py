@@ -1,9 +1,17 @@
 import os
 import json
+import chardet
 from bs4 import BeautifulSoup
 
+def detect_encoding(file_path):
+    with open(file_path, "rb") as file:
+        raw_data = file.read()
+        result = chardet.detect(raw_data)
+        return result['encoding']
+
 def extract_content_from_html(file_path):
-    with open(file_path, "r", encoding="utf-8") as file:
+    encoding = detect_encoding(file_path)
+    with open(file_path, "r", encoding=encoding, errors="ignore") as file:
         html_content = file.read()
 
     soup = BeautifulSoup(html_content, "html.parser")
@@ -39,7 +47,10 @@ def process_files(root_dir, output_root):
                 save_to_json(output_path, title, content)
                 print(f"Processed and saved: {output_path}")
 
-root_directory = "imperial_library"  # Change to the root directory containing your HTML files
+root_directory = "DUMPS/imperial_library"  # Change to the root directory containing your HTML files
 output_directory = "imperial_libary_cleaned"  # Change to the desired output directory
 
 process_files(root_directory, output_directory)
+
+
+# pay special attention to game books as it has a synopsis for each book. this may prove valuable.

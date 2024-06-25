@@ -1,18 +1,15 @@
 import json
-import os
-from pathlib import Path
-
 import gradio as gr
-import numpy as np
 from dotenv import load_dotenv
-from llama_index.core.node_parser import SentenceSplitter
 from llama_index.core.postprocessor import SentenceTransformerRerank
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
-from llama_index.core import Settings, VectorStoreIndex, StorageContext, load_index_from_storage, Document
+from llama_index.core import Settings
 from llama_index.llms.huggingface import HuggingFaceLLM
 from chat_bot_resources.config import DATA_DIRECTORY
 
-from chat_bot_resources.resources import create_or_load_index, messages_to_prompt_phi, completion_to_prompt_phi
+from chat_bot_resources.resources import create_or_load_index, messages_to_prompt_phi, completion_to_prompt_phi, \
+    messages_to_prompt_llama3, completion_to_prompt_llama3
+from llama_index.embeddings.openai import OpenAIEmbedding
 
 load_dotenv()
 
@@ -46,21 +43,23 @@ article_directory = DATA_DIRECTORY
 
 # Configure the settings
 Settings.embed_model = HuggingFaceEmbedding(model_name=config["embed_model"],)
+# Settings.embed_model = OpenAIEmbedding()
+
 Settings.llm = HuggingFaceLLM(
     model_name=config["model_name"],
     tokenizer_name=config["tokenizer_name"],
     context_window=config["context_window"],
     max_new_tokens=config["max_new_tokens"],
     generate_kwargs=config["generate_kwargs"],
-    messages_to_prompt=messages_to_prompt_phi,
-    completion_to_prompt=completion_to_prompt_phi,
-    model_kwargs={"trust_remote_code": True},
+    # messages_to_prompt=messages_to_prompt_llama3,
+    # completion_to_prompt=completion_to_prompt_llama3,
+    # model_kwargs={"trust_remote_code": True},
     device_map="auto",  # try to force this to cuda.
 )
 
 index = create_or_load_index(PERSIST_DIR, article_directory)
 rerank = SentenceTransformerRerank(
-    model="cross-encoder/ms-marco-MiniLM-L-2-v2", top_n=5  # Note here
+    model="BAAI/bge-reranker-large", top_n=5  # Note here
 )
 
 query_engine = index.as_query_engine(streaming=True, similarity_top_k=1, node_postprocessors=[rerank])

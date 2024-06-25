@@ -56,3 +56,28 @@ def messages_to_prompt_phi(messages):
     prompt = prompt + "<|assistant|>\n"
 
     return prompt
+
+
+def completion_to_prompt_llama3(completion):
+    return f"### System\nYou are a librarian that helps summarize Elder Scrolls lore.\n\n### Assistant\n{completion}\n"
+
+
+# Transform a list of chat messages into Llama3-specific input
+def messages_to_prompt_llama3(messages):
+    prompt = ""
+    for message in messages:
+        if message['role'] == "system":
+            prompt += f"### System\n{message['content']}\n"
+        elif message['role'] == "user":
+            prompt += f"### User\n{message['content']}\n"
+        elif message['role'] == "assistant":
+            prompt += f"### Assistant\n{message['content']}\n"
+
+    # Ensure we start with a system prompt, insert blank if needed
+    if not prompt.startswith("### System"):
+        prompt = "### System\n\n" + prompt
+
+    # Add final assistant prompt
+    prompt += "### Assistant\n"
+
+    return prompt
