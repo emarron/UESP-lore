@@ -220,19 +220,16 @@ The Hugging Faces key **might** be required for Alternative versions, but I don'
 -  **HERE**: [\[Download link\]](https://app.mediafire.com/x3nhxfhn1m3o1)
 
 **DATA**: All of these contain over 7,000 articles.
-- articles: the training set as json
+- cleaned_articles_tagged: the training set as json
 - UESP_LORE_DUMP: raw html from the UESP wiki where page was present in [Lore](https://en.uesp.net/wiki/Special:AllPages?from=&to=&namespace=130&hideredirects=1). 
-- IMPERIAL_LIBRARY_DUMP: raw html from the imperial library
+- (soon) IMPERIAL_LIBRARY_DUMP: raw html from the imperial library
 
 **EMBEDDINGS**: storage_(EMBEDDING_METHOD)_(LLM):
 - storage_ada_gpt_3-5-turbo: this is for the chatgpt version
-- storage_bge-base-en-v1-5_local_llama3: this is for the local ollama version
-- storage_bge-base-en-v1-5_Meta-Llama-3-8B-Instruct: Hugging Faces is using this one.
-- storage_bge-base-en-v1-5_TinyLlama-1-1B-Chat-v1-0: For TinyLlama 1B Chat
-- storage_bge_base_en_v1-5_Phi-3-mini-128k-instruct: For Phi-3-mini 128k instruct
-- storage_bge_base_en_v1-5_Qwen2-1-5B-Instruct: For Qwen2 1.5B instruct
+- storage_bge-large-en-v1-5_local_ollama_llama3: this is for the local ollama version
 
-At later dates I may revise these embeddings by changing the dataset. Currently I am working on implementing a tagging system.
+
+At later dates I may revise these embeddings by changing the dataset.
 ### Usage
 
   
