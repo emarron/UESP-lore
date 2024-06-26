@@ -1,0 +1,5 @@
+ntlk
+json5
+spacy
+beautifulsoup4
+datasets

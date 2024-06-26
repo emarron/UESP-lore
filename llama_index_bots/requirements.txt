@@ -1,0 +1,5 @@
+gradio
+llama_index
+llama-index-llms-ollama
+llama-index-embeddings-huggingface
+llama_index-llms-huggingface
