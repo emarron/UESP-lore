@@ -4,7 +4,7 @@
 This is the master directory of data for the entire project:
 **[Mediafire Master Folder](https://app.mediafire.com/x3nhxfhn1m3o1)**
 
-There are these sub-directories:
+There are these subdirectories:
 - chat_gpt_assistant_data: refer to the `chat_gpt_assistant` section.
 - llamaindex - refer to `storage` and `llama_index_bot` section.
 - OLD - ignore

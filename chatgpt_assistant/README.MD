@@ -15,11 +15,22 @@
 
 2. **Understand Vector Stores**
    - Vector stores enhance data retrieval using vector embeddings. Refer to the [API documentation](https://platform.openai.com/docs/api-reference/vector-stores).
-    - An important limit is that each vector store can only have 500 files at this moment. I would recommend you consolidate related data to a master json.
+   - Note that each vector store can currently hold a maximum of 500 files. It's recommended to consolidate related data into a master JSON file when necessary.
 
+### Script: `attach_vector_stores_to_assistant.py`
 
-This file 
-`attach_vector_stores_to_assistant.py` is specifically designed to help you set up your lore bot.
-It uses this [data](https://app.mediafire.com/25peu9ki4zab5).
+This script is designed to help you set up your lore bot using data from a series of JSON files dedicated to specific topics. Each book is nested under its relevant topic.
 
-Please change the directory path to match where you put this directory to hand the references to chatgpt.
+**Example:**
+- `religion_legends.json` contains books such as:
+  - The Lunar Lorkhan
+  - Sithis
+  - Spirit of Nirn
+  - And many more
+
+For details on the structure of a book, see the `cleaning` section.
+
+### Usage
+1. Change the directory path in the script to match where you saved the data from this [link](https://app.mediafire.com/25peu9ki4zab5).
+2. Run the script to attach the vector stores to your assistant.
+3. Go to your Project dashboard, navigate to Assistants, and start enjoying your lore bot.

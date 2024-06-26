@@ -32,13 +32,28 @@ This summer project aims to explore the effectiveness of various implementations
 
 ## Demo:
 ### Highest Performing Version:
-- **ChatGPT-3.5-Turbo Assistant** with a vector index of Imperial Library Master JSONs.
-  - [Insert demo link]
+#### ChatGPT-3.5-Turbo Assistant with a vector index of Imperial Library Master JSONs.
 
+**User:** What are books related to Lorkhan?
+
+**Lorebot:**
+Here are some books related to Lorkhan that you may find interesting:
+
+"The Lunar Lorkhan" by Fal Droon: This book explains how Tamriel's moons are the decaying body of Lorkhan[1].
+
+"Sithis": This book explores the connection between Sithis and Lorkhan, detailing how Sithis sundered the nothing and mutated the parts, leading to a myriad of possibilities[2].
+
+"Spirit of Nirn": Provides a brief examination of the role of Lorkhan in various pantheons, highlighting the complex views different races hold regarding Lorkhan[3].
+
+[1] religion & legends.json  
+[2] religion & legends.json  
+[3] religion & legends.json
+
+religion & legends.json refers to a Master JSON that contains ... religion & legends books. Read `chatgpt_assistant` for more information.
 ### Lower Performing Version:
-- **Hugging Face Demo** featuring Llama-8B-Instruct + BGE_large + UESP 7,000 Lore articles as JSONs.
+#### Hugging Face Demo featuring Llama-8B-Instruct + BGE_large + UESP 7,000 Lore articles as JSONs.
   - [Hugging Face Demo](https://huggingface.co/spaces/emarron/elderscrolls_lore_bot)
-
+- This is **not very good**, but hey, it's free and requires no installation.
 ---
 
 Please click on each subdirectory to have their specific purpose explained. Understanding the storage and data is critical before making a selection.
