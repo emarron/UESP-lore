@@ -34,3 +34,25 @@ For details on the structure of a book, see the `cleaning` section.
 1. Change the directory path in the script to match where you saved the data from this [link](https://app.mediafire.com/25peu9ki4zab5).
 2. Run the script to attach the vector stores to your assistant.
 3. Go to your Project dashboard, navigate to Assistants, and start enjoying your lore bot.
+
+Create a `.env` file with the following content:
+
+```plaintext
+OPENAI_API_KEY="%Your_Project_API_Key%"
+ASSISTANT_ID="%Your_Assistant_ID%"
+```
+
+If you don't have an assistant yet, run `make_assistant.py` and copy the ID from the terminal output.
+
+Example:
+```plaintext
+python chatgpt-assistant/make_assistant.py
+returns
+Assistant(id='asst_abcd1234', %Bunch of other details%)
+```
+
+Add the following to your `.env` file:
+
+```plaintext
+ASSISTANT_ID="asst_abcd1234"
+```
