@@ -1,4 +1,4 @@
-ntlk
+nltk
 json5
 spacy
 beautifulsoup4
